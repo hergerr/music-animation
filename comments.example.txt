@@ -1,0 +1,9 @@
+
+1] Do you prefer tea or coffee?
+[X] Tea
+[ ] Coffee
+[ ] Both
+[ ] None of the above
+
+2] What is your favorite sport?
+> Football because I like to practice the sport itself, and the fact that it brings people together.

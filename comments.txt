@@ -1,0 +1,31 @@
+
+1] You implemented the application using (put a 'x' in the selected box, e.g. "[x] Vue"):
+[ ] Vue
+[ ] JavaScript
+
+2] You chose to implement the application using this technology rather than the other option because:
+> 
+> 
+
+3] How much time did you spend on this challenge?
+> 
+
+4] What was the most time consuming part of this challenge?
+> 
+
+5] Is the 'Start' button strictly needed? If so, why? If not, would you think it would be better to remove it?
+> 
+
+6] Do you have any suggestions for improving the visual appeal or the user experience of this application?
+> 
+> 
+> 
+> 
+
+7] (Only if you added more dependencies) For each added dependency, justify why you added it.
+> 
+
+8] Do you have anything else to add to help us understand your approach?
+> 
+> 
+> 
