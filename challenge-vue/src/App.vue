@@ -8,21 +8,13 @@
 
 
 <script>
-import { defineComponent, watchEffect } from "vue";
-import { audio } from "./store/Audio.store";
+import { defineComponent } from "vue";
 import AudioVisualizer from "./components/AudioVisualizer.vue";
 import AudioControls from "./components/AudioControls.vue";
 
 export default defineComponent({
   components: { AudioVisualizer, AudioControls },
-  setup() {
-      watchEffect(()=> {
-        //   console.log(audio.value)
-      })
-    return {
-      audio,
-    };
-  },
+  setup() {},
 });
 </script>
 

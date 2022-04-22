@@ -1,8 +1,8 @@
 <template>
   <div class="button-player">
-    <audio v-show="playerVisible" controls src="music.mp3" ref="audio" />
+    <audio v-show="buttonClicked" controls src="music.mp3" ref="audio" />
     <button
-      v-show="!playerVisible"
+      v-show="!buttonClicked"
       class="btn btn-primary mt-2"
       @click="handlePlayButton"
     >
@@ -12,21 +12,18 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 import { audio, buttonClicked } from "../store/Audio.store";
 
 export default defineComponent({
   setup() {
-    const playerVisible = ref(false);
-
     const handlePlayButton = () => {
-      playerVisible.value = !playerVisible.value;
       buttonClicked.value = !buttonClicked.value;
     };
 
     return {
       audio,
-      playerVisible,
+      buttonClicked,
       handlePlayButton,
     };
   },
