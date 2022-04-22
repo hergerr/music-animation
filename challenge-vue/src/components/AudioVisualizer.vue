@@ -1,5 +1,8 @@
 <template>
-  <canvas class="visualizer border border-dark m-auto rounded mt-3" ref="canvas"></canvas>
+  <svg
+    class="visualizer border border-dark m-auto rounded mt-3"
+    ref="visualizer"
+  ></svg>
 </template>
 
 <script>
@@ -8,42 +11,61 @@ import { audio, buttonClicked } from "../store/Audio.store";
 
 export default defineComponent({
   setup() {
-    const canvas = ref(null);
+    const visualizer = ref(null);
+    /* eslint-disable */
+    const createRectangle = (x, y, width, height) => {
+      // create svg tag
+      var svgns = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      // create svg element rectangle
+      var rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      rect.setAttribute("x", x.toString());
+      rect.setAttribute("y", y.toString());
+      rect.setAttribute("width", width.toString());
+      rect.setAttribute("height", height.toString());
+      svgns.appendChild(rect);
+
+      return svgns;
+    };
 
     const handleAnimation = () => {
       var audioCtx = new window.AudioContext();
       var source = audioCtx.createMediaElementSource(audio.value);
       var analyser = audioCtx.createAnalyser();
-      
+
       source.connect(analyser);
       analyser.connect(audioCtx.destination);
-      analyser.fftSize = 2048;
-      canvas.value.width = 400;
-      canvas.value.height = 400;
-      var ctx = canvas.value.getContext("2d");
+      analyser.fftSize = 512;
+      //   number of values for visualization
       var bufferLength = analyser.frequencyBinCount;
-      console.log(bufferLength);
       var dataArray = new Uint8Array(bufferLength);
-      var WIDTH = canvas.value.width;
-      var HEIGHT = canvas.value.height;
-      var barWidth = (WIDTH / bufferLength) * 2.5;
+
+      var WIDTH = visualizer.value.width.baseVal.value;
+      var HEIGHT = visualizer.value.height.baseVal.value;
+
+      var barWidth = (WIDTH / bufferLength);
       var barHeight;
       var x = 0;
+
       function renderFrame() {
-        requestAnimationFrame(renderFrame);
+        visualizer.value.innerHTML = ''
         x = 0;
         analyser.getByteFrequencyData(dataArray);
-        ctx.fillStyle = "#000";
-        ctx.fillRect(0, 0, WIDTH, HEIGHT);
         for (var i = 0; i < bufferLength; i++) {
           barHeight = dataArray[i];
-          var r = barHeight + 25 * (i / bufferLength);
-          var g = 250 * (i / bufferLength);
-          var b = 50;
-          ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
-          ctx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
+
+          var rect = createRectangle(
+            x,
+            HEIGHT - barHeight,
+            barWidth,
+            barHeight
+          );
+          visualizer.value.appendChild(rect);
           x += barWidth + 1;
         }
+
+        setTimeout(() => {
+          requestAnimationFrame(renderFrame);
+        }, 1000/40);
       }
       audio.value.play();
       renderFrame();
@@ -52,13 +74,11 @@ export default defineComponent({
     watchEffect(() => {
       if (buttonClicked.value) {
         handleAnimation();
-      } else {
-        console.log("no nie");
       }
     });
 
     return {
-      canvas,
+      visualizer,
     };
   },
 });
