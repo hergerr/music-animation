@@ -3,20 +3,18 @@
  * The skeleton is here to help you get started in case you want to use it.
  */
 
-const state = () => ({
-    
-});
+import { ref } from "vue";
 
-const getters = {
+const audio = ref(null);
+const buttonClicked = ref(false);
 
-};
+const state = () => ({});
 
-const actions = {
+const getters = {};
 
-};
+const actions = {};
 
-const mutations = {
+const mutations = {};
 
-};
-
-export default { state, getters, actions, mutations, namespaced: true, };
+export default { state, getters, actions, mutations, namespaced: true, audio };
+export { audio, buttonClicked };
