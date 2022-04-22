@@ -5,7 +5,7 @@
 const FFT_SIZE = 512;
 
 /**
- * Audio animation refresh frequency
+ * Audio animation refresh frequency (Hz)
  */
 const FREQUENCY = 40;
 
