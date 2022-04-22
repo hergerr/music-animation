@@ -1,26 +1,30 @@
 
 1] You implemented the application using (put a 'x' in the selected box, e.g. "[x] Vue"):
-[ ] Vue
+[x] Vue
 [ ] JavaScript
 
 2] You chose to implement the application using this technology rather than the other option because:
-> 
+> Vue is VirtualDom based framework, thus, the peformance is better.
+> I estimated, that there could be lot of state management with bars - there was not.
+> Dividing frontend code to components makes it simpler to keep order and understand for others.
 > 
 
 3] How much time did you spend on this challenge?
-> 
+> I spend ~6 hours
 
 4] What was the most time consuming part of this challenge?
-> 
+> Understanding the necessary tools (audio processing, drawing and animating svg)
+> reminding myself Vue (I used it last time 6 months ago)
 
 5] Is the 'Start' button strictly needed? If so, why? If not, would you think it would be better to remove it?
-> 
+> It is not needed. I think it would be better to remove it. Music could for example start by pressing 'space'
+> (of course information about it should be well visible).
 
 6] Do you have any suggestions for improving the visual appeal or the user experience of this application?
-> 
-> 
-> 
-> 
+> Make visualization full-screen with nice gradient as a background.
+> Make custom player tool.
+> Start on pressing 'space'.
+> Include song name and author somewhere (mayber right-upper corner).
 
 7] (Only if you added more dependencies) For each added dependency, justify why you added it.
 > 
