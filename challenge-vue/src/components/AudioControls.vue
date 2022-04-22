@@ -12,11 +12,19 @@
 </template>
 
 <script>
+/**
+ * Component containing button for turning on animation
+ * and audio element.
+ */
 import { defineComponent } from "vue";
-import { audio, buttonClicked } from "../store/Audio.store";
+import { audio, buttonClicked } from "@/store/Audio.store";
 
 export default defineComponent({
   setup() {
+    /**
+     * Gets called, once 'start' button is clicked.
+     * Makes button disappear and audio player appear
+     */
     const handlePlayButton = () => {
       buttonClicked.value = !buttonClicked.value;
     };

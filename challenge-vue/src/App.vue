@@ -9,8 +9,8 @@
 
 <script>
 import { defineComponent } from "vue";
-import AudioVisualizer from "./components/AudioVisualizer.vue";
-import AudioControls from "./components/AudioControls.vue";
+import AudioVisualizer from "@/components/AudioVisualizer.vue";
+import AudioControls from "@/components/AudioControls.vue";
 
 export default defineComponent({
   components: { AudioVisualizer, AudioControls },

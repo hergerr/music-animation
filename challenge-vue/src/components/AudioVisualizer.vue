@@ -6,15 +6,25 @@
 </template>
 
 <script>
+/**
+ * Component responsible for showing visualizer
+ * and performing SVG audio animation.
+ */
 import { defineComponent, ref, watchEffect } from "@vue/runtime-core";
-import { audio, buttonClicked } from "../store/Audio.store";
-import { useAudio } from "../composables/useAudio";
-import { createRectangle } from "../utils/drawingUtils";
+import { audio, buttonClicked } from "@/store/Audio.store";
+import { useAudio } from "@/composables/useAudio";
+import { createRectangle } from "@/utils/drawingUtils";
+import { FREQUENCY } from "@/config/config";
 
 export default defineComponent({
   setup() {
     const visualizer = ref(null);
 
+    /**
+     *  Gets called after 'start' button is clicked.
+     *  Gets information about visualizer area and
+     *  draws the bars as an audio visualization
+     */
     const handleAnimation = () => {
       const { analyser, dataArray, bufferLength } = useAudio(audio.value);
 
@@ -24,6 +34,10 @@ export default defineComponent({
       const barWidth = VISUALIZER_WIDTH / bufferLength;
       let barHeight;
 
+      /**
+       * Gets called every period of time set by FREQUENCY setting.
+       * Draws the bars as an audio visualization
+       */
       function renderFrame() {
         visualizer.value.innerHTML = "";
         let coordX = 0;
@@ -43,12 +57,16 @@ export default defineComponent({
 
         setTimeout(() => {
           requestAnimationFrame(renderFrame);
-        }, 1000 / 40);
+        }, 1000 / FREQUENCY);
       }
       audio.value.play();
       renderFrame();
     };
 
+    /**
+     * Watches for change of 'start' button state
+     * if it has changes, turns on audio and visualization
+     */
     watchEffect(() => {
       if (buttonClicked.value) {
         handleAnimation();

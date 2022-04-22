@@ -5,7 +5,15 @@
 
 import { ref } from "vue";
 
+/**
+ * simple central storage for HTMLAudioElement
+ */
 const audio = ref(null);
+
+/**
+ * simple central storage for variable
+ * controlling button and audio behavior
+ */
 const buttonClicked = ref(false);
 
 const state = () => ({});
