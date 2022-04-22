@@ -1,9 +1,11 @@
 <template>
-  <div>
-    <audio v-if="playerVisible" controls id="audio" class="player">
-      <source src="music.mp3" type="audio/mp3" />
-    </audio>
-    <button v-else class="btn btn-primary mt-2" @click="playButtonClicked">
+  <div class="button-player">
+    <audio v-show="playerVisible" controls src="music.mp3" ref="audio"></audio>
+    <button
+      v-show="!playerVisible"
+      class="btn btn-primary mt-2"
+      @click="handlePlayButton"
+    >
       start
     </button>
   </div>
@@ -14,17 +16,31 @@ import { defineComponent, ref } from "vue";
 export default defineComponent({
   setup() {
     const playerVisible = ref(false);
+    const audio = ref(null);
 
-    const playButtonClicked = () => {
-      playerVisible.value = !playerVisible.value;
+    const handlePlayer = () => {
+      console.log(audio.value);
+
+      audio.value?.play();
     };
+
+    const handlePlayButton = () => {
+      playerVisible.value = !playerVisible.value;
+
+      handlePlayer();
+    };
+
     return {
+      audio,
       playerVisible,
-      playButtonClicked,
+      handlePlayButton,
     };
   },
 });
 </script>
 
 <style lang="scss" scoped>
+.button-player {
+  height: 50px;
+}
 </style>
