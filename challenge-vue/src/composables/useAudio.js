@@ -1,15 +1,17 @@
 import { FFT_SIZE } from "@/config/config";
 
 /**
+ * Composition functions which initializes
+ * objects and data necessary for visualization
  *
  * @param {HTMLAudioElement} audio The reference for audio element
  *
  * @typedef {Object} AudioVisualizationUtils
  * @property {AnalyserNode} analyser Tool for exposing audio time and
- * frequency data and create data visualizations.
+ *  frequency data and create data visualizations.
  *
- * @property {Uint8Array} dataArray 8-bit unsigned array with unsigned integers.
- * Content initialized to 0
+ * @property {Uint8Array} dataArray 8-bit unsigned array with
+ *  unsigned integers. Content initialized to 0
  *
  * @property {number} bufferLength number of data to visualize. Half of fftSize.
  *

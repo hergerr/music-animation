@@ -8,6 +8,9 @@
 
 
 <script>
+/**
+ * Main application component
+ */
 import { defineComponent } from "vue";
 import AudioVisualizer from "@/components/AudioVisualizer.vue";
 import AudioControls from "@/components/AudioControls.vue";
@@ -17,6 +20,3 @@ export default defineComponent({
   setup() {},
 });
 </script>
-
-<style lang="scss" scoped>
-</style>
