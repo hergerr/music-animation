@@ -54,10 +54,16 @@ export default defineComponent({
         // Precision loss is barely visible
         analyser.getByteTimeDomainData(dataArray);
         for (let i = 0; i < bufferLength; i++) {
+          
           // Math.max(Math.max(0, dataArray[i] - 128)) cuts
           // 'negative' samples. multiplier makes them
           // high proportionally to SVG container size
           barHeight = Math.max(0, dataArray[i] - 128) * BAR_HEIGHT_MULTIPLIER;
+
+          // Making bars stick to the bottom of a container.
+          // They normally render on the top, so Y coordinate
+          // must be calculated this way, to make them reach
+          // bottom border of svg container.
           const rect = createRectangle(
             coordX,
             VISUALIZER_HEIGHT - barHeight,
