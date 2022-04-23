@@ -2,7 +2,17 @@
   <svg
     class="visualizer border border-dark m-auto rounded mt-3"
     ref="visualizer"
-  ></svg>
+  >
+    <rect
+      v-for="bar in bars"
+      :key="bar.coordX"
+      :x="bar.coordX"
+      :y="bar.coordY"
+      :width="bar.width"
+      :height="bar.height"
+      :fill="bar.fill"
+    ></rect>
+  </svg>
 </template>
 
 <script>
@@ -13,12 +23,13 @@
 import { defineComponent, ref, watchEffect } from "@vue/runtime-core";
 import { audio, buttonClicked } from "@/store/Audio.store";
 import { useAudio } from "@/composables/useAudio";
-import { createRectangle } from "@/utils/drawingUtils";
 import { FREQUENCY } from "@/config/config";
+/* eslint-disable */
 
 export default defineComponent({
   setup() {
     const visualizer = ref(null);
+    const bars = ref([]);
 
     /**
      *  Gets called after 'start' button is clicked.
@@ -47,8 +58,6 @@ export default defineComponent({
        * Draws the bars as an audio visualization
        */
       function renderFrame() {
-        // clear svg container from bars
-        visualizer.value.innerHTML = "";
         let coordX = 0;
 
         // Byte as samples values are saving some memmory.
@@ -64,13 +73,16 @@ export default defineComponent({
           // They normally render on the top, so Y coordinate
           // must be calculated this way, to make them reach
           // bottom border of svg container.
-          const rect = createRectangle(
+          const coordY = VISUALIZER_HEIGHT - barHeight;
+
+          const rect = {
             coordX,
-            VISUALIZER_HEIGHT - barHeight,
-            barWidth,
-            barHeight
-          );
-          visualizer.value.appendChild(rect);
+            coordY,
+            width: barWidth,
+            height: barHeight,
+            fill: "rgb(" + coordX + "," + coordY + "," + barHeight + ")",
+          };
+          bars.value[i] = rect;
           coordX += barWidth + 1;
         }
 
@@ -94,6 +106,7 @@ export default defineComponent({
 
     return {
       visualizer,
+      bars,
     };
   },
 });
