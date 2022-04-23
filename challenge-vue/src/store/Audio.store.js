@@ -3,19 +3,6 @@
  * The skeleton is here to help you get started in case you want to use it.
  */
 
-import { ref } from "vue";
-
-/**
- * simple central storage for HTMLAudioElement
- */
-const audio = ref(null);
-
-/**
- * simple central storage for variable
- * controlling button and audio behavior
- */
-const buttonClicked = ref(false);
-
 const state = () => ({});
 
 const getters = {};
@@ -24,5 +11,4 @@ const actions = {};
 
 const mutations = {};
 
-export default { state, getters, actions, mutations, namespaced: true, audio };
-export { audio, buttonClicked };
+export default { state, getters, actions, mutations, namespaced: true };

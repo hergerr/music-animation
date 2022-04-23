@@ -1,8 +1,7 @@
 <template>
   <div class="container mt-5 text-center">
     <h1>Visualizer</h1>
-    <audio-controls />
-    <audio-visualizer />
+    <visualizer-page />
   </div>
 </template>
 
@@ -12,11 +11,10 @@
  * Main application component
  */
 import { defineComponent } from "vue";
-import AudioVisualizer from "@/components/AudioVisualizer.vue";
-import AudioControls from "@/components/AudioControls.vue";
+import VisualizerPage from "@/pages/VisualizerPage.vue";
 
 export default defineComponent({
-  components: { AudioVisualizer, AudioControls },
+  components: { VisualizerPage },
   setup() {},
 });
 </script>
