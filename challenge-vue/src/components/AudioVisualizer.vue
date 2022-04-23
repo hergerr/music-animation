@@ -74,14 +74,14 @@ export default defineComponent({
           // bottom border of svg container.
           const coordY = VISUALIZER_HEIGHT - barHeight;
 
-          const rect = {
+          const bar = {
             coordX,
             coordY,
             width: barWidth,
             height: barHeight,
-            fill: "rgb(" + coordX + "," + coordY + "," + barHeight + ")",
+            fill: `rgb(${coordX},${coordY},${barHeight})`,
           };
-          bars.value[i] = rect;
+          bars.value[i] = bar;
           coordX += barWidth + 1;
         }
 

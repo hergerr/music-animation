@@ -3,4 +3,7 @@
         "challenge-vue",
         "challenge-javascript"
     ],
+    "vetur.experimental": {
+        "templateInterpolationService": false
+    }
 }
