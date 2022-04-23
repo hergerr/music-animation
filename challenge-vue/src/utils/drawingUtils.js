@@ -1,8 +1,8 @@
 /**
  * Creates SVG bar for visualization with given position and size
  *
- * @param {number} x X-position of left-bottom corner of rectangle
- * @param {number} y Y-position of left-bottom corner of rectangle
+ * @param {number} x X-position of left-upper corner of rectangle
+ * @param {number} y Y-position of left-upper corner of rectangle
  * @param {number} width width of the rectangle
  * @param {number} height height of the rectangle
  * @returns single svg rectangle bar for visualization

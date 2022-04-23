@@ -8,10 +8,10 @@ import { FFT_SIZE } from "@/config/config";
  *
  * @typedef {Object} AudioVisualizationUtils
  * @property {AnalyserNode} analyser Tool for exposing audio time and
- *  frequency data and create data visualizations.
+ * frequency data and create data visualizations.
  *
  * @property {Uint8Array} dataArray 8-bit unsigned array with
- *  unsigned integers. Content initialized to 0
+ * unsigned integers. Content initialized to 0
  *
  * @property {number} bufferLength number of data to visualize. Half of fftSize.
  *

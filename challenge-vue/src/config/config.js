@@ -2,7 +2,7 @@
  * Window size in samples that is used when performing a
  * Fast Fourier Transform (FFT) to get frequency domain data.
  */
-const FFT_SIZE = 512;
+const FFT_SIZE = 64;
 
 /**
  * Audio animation refresh frequency (Hz)

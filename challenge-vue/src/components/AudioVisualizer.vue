@@ -34,6 +34,14 @@ export default defineComponent({
       const barWidth = VISUALIZER_WIDTH / bufferLength;
       let barHeight;
 
+      // Samples lower than 128 are treated as negative
+      // and for better visualization, rounded to 0.
+      const MAX_SAMPLE_VALUE = 255 - 128;
+
+      // Multiplier which makes the highest possible value
+      // to take whole SVG container height.
+      const BAR_HEIGHT_MULTIPLIER = VISUALIZER_HEIGHT / MAX_SAMPLE_VALUE;
+
       /**
        * Gets called every period of time set by FREQUENCY setting.
        * Draws the bars as an audio visualization
@@ -41,10 +49,15 @@ export default defineComponent({
       function renderFrame() {
         visualizer.value.innerHTML = "";
         let coordX = 0;
-        analyser.getByteFrequencyData(dataArray);
-        for (let i = 0; i < bufferLength; i++) {
-          barHeight = dataArray[i];
 
+        // Byte as samples values are saving some memmory.
+        // Precision loss is barely visible
+        analyser.getByteTimeDomainData(dataArray);
+        for (let i = 0; i < bufferLength; i++) {
+          // Math.max(Math.max(0, dataArray[i] - 128)) cuts
+          // 'negative' samples. multiplier makes them
+          // high proportionally to SVG container size
+          barHeight = Math.max(0, dataArray[i] - 128) * BAR_HEIGHT_MULTIPLIER;
           const rect = createRectangle(
             coordX,
             VISUALIZER_HEIGHT - barHeight,

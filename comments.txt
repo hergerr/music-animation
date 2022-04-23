@@ -6,7 +6,7 @@
 2] You chose to implement the application using this technology rather than the other option because:
 > Vue is VirtualDom based framework, thus the peformance is better.
 > I estimated, that there could be lot of state management with bars - there was not.
-> Dividing frontend code to components makes it simpler to keep order and understand for others.
+> Dividing frontend code to components makes it simpler to keep in order and to understand for others.
 
 3] How much time did you spend on this challenge?
 > I spend ~5 hours on one sitting to make working version.
