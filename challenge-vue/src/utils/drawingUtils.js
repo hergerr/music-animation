@@ -1,5 +1,6 @@
 /**
  * Creates SVG bar for visualization with given position and size
+ * with color based on its coordinates and height
  *
  * @param {number} x X-position of left-upper corner of rectangle
  * @param {number} y Y-position of left-upper corner of rectangle
@@ -15,6 +16,8 @@ export const createRectangle = (x, y, width, height) => {
   rect.setAttribute("y", y.toString());
   rect.setAttribute("width", width.toString());
   rect.setAttribute("height", height.toString());
+
+  rect.style.fill = "rgb(" + x + "," + y + "," + height + ")";
 
   return rect;
 };
