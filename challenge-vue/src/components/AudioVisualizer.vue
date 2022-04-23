@@ -47,6 +47,7 @@ export default defineComponent({
        * Draws the bars as an audio visualization
        */
       function renderFrame() {
+        // clear svg container from bars
         visualizer.value.innerHTML = "";
         let coordX = 0;
 
@@ -54,7 +55,6 @@ export default defineComponent({
         // Precision loss is barely visible
         analyser.getByteTimeDomainData(dataArray);
         for (let i = 0; i < bufferLength; i++) {
-          
           // Math.max(Math.max(0, dataArray[i] - 128)) cuts
           // 'negative' samples. multiplier makes them
           // high proportionally to SVG container size
