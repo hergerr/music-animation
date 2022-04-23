@@ -21,15 +21,19 @@
  * and performing SVG audio animation.
  */
 import { defineComponent, ref, watchEffect } from "@vue/runtime-core";
-import { audio, buttonClicked } from "@/store/Audio.store";
 import { useAudio } from "@/composables/useAudio";
 import { FREQUENCY } from "@/config/config";
-/* eslint-disable */
 
 export default defineComponent({
-  setup() {
+  props: ["playAudio, audio"],
+  setup(props) {
     const visualizer = ref(null);
     const bars = ref([]);
+
+    watchEffect(() => {
+      console.log('szkrab w useEffect', props.playAudio)
+      console.log('szkrab w useEffect', props.audio)
+    })
 
     /**
      *  Gets called after 'start' button is clicked.
@@ -37,7 +41,7 @@ export default defineComponent({
      *  draws the bars as an audio visualization
      */
     const handleAnimation = () => {
-      const { analyser, dataArray, bufferLength } = useAudio(audio.value);
+      const { analyser, dataArray, bufferLength } = useAudio(props.audio);
 
       const VISUALIZER_WIDTH = visualizer.value.width.baseVal.value;
       const VISUALIZER_HEIGHT = visualizer.value.height.baseVal.value;
@@ -90,7 +94,7 @@ export default defineComponent({
           requestAnimationFrame(renderFrame);
         }, 1000 / FREQUENCY);
       }
-      audio.value.play();
+      props.audio.play();
       renderFrame();
     };
 
@@ -99,7 +103,7 @@ export default defineComponent({
      * if it has changes, turns on audio and visualization
      */
     watchEffect(() => {
-      if (buttonClicked.value) {
+      if (props.playAudio) {
         handleAnimation();
       }
     });

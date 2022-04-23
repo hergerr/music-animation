@@ -1,10 +1,10 @@
 <template>
   <div class="button-player">
-    <audio v-show="buttonClicked" controls src="music.mp3" ref="audio" />
+    <audio v-show="playAudio" controls src="music.mp3" ref="audioRef" />
     <button
-      v-show="!buttonClicked"
+      v-show="!playAudio"
       class="btn btn-primary mt-2"
-      @click="handlePlayButton"
+      @click="handleClick"
     >
       start
     </button>
@@ -16,23 +16,25 @@
  * Component containing button for turning on animation
  * and audio element.
  */
-import { defineComponent } from "vue";
-import { audio, buttonClicked } from "@/store/Audio.store";
+import { defineComponent, onMounted, ref } from "vue";
 
 export default defineComponent({
-  setup() {
-    /**
-     * Gets called, once 'start' button is clicked.
-     * Makes button disappear and audio player appear
-     */
-    const handlePlayButton = () => {
-      buttonClicked.value = !buttonClicked.value;
+  props: ["playAudio", "audio"],
+  emits: ["update:playAudio", "update:audio"],
+  setup(props, { emit }) {
+    const audioRef = ref(null);
+
+    onMounted(() => {
+      emit("update:audio", audioRef.value);
+    });
+
+    const handleClick = () => {
+      emit("update:playAudio", !props.playAudio);
     };
 
     return {
-      audio,
-      buttonClicked,
-      handlePlayButton,
+      audioRef,
+      handleClick,
     };
   },
 });

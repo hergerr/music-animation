@@ -10,12 +10,6 @@ import { ref } from "vue";
  */
 const audio = ref(null);
 
-/**
- * simple central storage for variable
- * controlling button and audio behavior
- */
-const buttonClicked = ref(false);
-
 const state = () => ({});
 
 const getters = {};
@@ -25,4 +19,4 @@ const actions = {};
 const mutations = {};
 
 export default { state, getters, actions, mutations, namespaced: true, audio };
-export { audio, buttonClicked };
+export { audio };
