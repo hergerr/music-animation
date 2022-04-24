@@ -7,18 +7,18 @@ import { FFT_SIZE } from "@/config/config";
  * @param {HTMLAudioElement} audio The reference for audio element
  *
  * @typedef {Object} AudioVisualizationUtils
- * @property {AnalyserNode} analyser Tool for exposing audio time and
- * frequency data and create data visualizations.
+ * @property {AnalyserNode} analyser Tool for providing real-time
+ * frequency and time-domain data.
  *
  * @property {Uint8Array} dataArray 8-bit unsigned array with
- * unsigned integers. Content initialized to 0
+ * unsigned integers. Content initialized with 0s.
  *
  * @property {number} bufferLength number of data to visualize. Half of fftSize.
  *
  * @return {AudioVisualizationUtils}
  */
 export function useAudio(audio) {
-  const audioCtx = new window.AudioContext();
+  const audioCtx = new AudioContext();
   const source = audioCtx.createMediaElementSource(audio);
   const analyser = audioCtx.createAnalyser();
 
