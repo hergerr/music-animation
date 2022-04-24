@@ -7,7 +7,7 @@
 
 <script>
 /**
- * Main application component
+ * Main application component.
  */
 import { defineComponent } from "vue";
 import VisualizerPage from "@/pages/VisualizerPage.vue";

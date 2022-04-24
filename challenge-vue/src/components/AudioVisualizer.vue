@@ -17,8 +17,8 @@
 
 <script>
 /**
- * Component responsible for showing visualizer
- * and performing SVG audio animation.
+ * Component responsible for showing audio
+ * animation with SVG rectangle bars
  */
 import { defineComponent, ref, watchEffect } from "@vue/runtime-core";
 
@@ -36,13 +36,17 @@ export default defineComponent({
     const bars = ref([]);
     const barWidth = ref(0);
     const visualizerHeight = ref(0);
-    
-    // Multiplier which makes the highest possible value
-    // to take whole SVG container height.
+
+    /**
+     * Multiplier which makes the highest possible value
+     * to take whole SVG container height.
+     */
     const barHeightMultiplier = ref(0);
 
-    // Samples lower than 128 are treated as negative
-    // and for better visualization, rounded to 0.
+    /**
+     * Samples lower than 128 are treated as negative
+     * for purpose of better visualization
+     */
     const MAX_SAMPLE_VALUE = 255 - 128;
 
     /**
@@ -59,25 +63,27 @@ export default defineComponent({
     }
 
     /**
-     * Gets called every period of time set by FREQUENCY setting.
-     * Draws the bars as an audio visualization
+     * Draws the bars as an audio visualization.
+     * Called, when visualization data changes.
      */
     function renderFrame() {
       let coordX = 0;
 
-      // Working with byte because of intuitive min and max value
       for (let i = 0; i < props.visualizationBufferLength; i++) {
-        // Math.max(Math.max(0, dataArray[i] - 128)) cuts
-        // 'negative' samples. multiplier makes them
-        // high proportionally to SVG container size
-        let barHeight =
+        /**
+         * Math.max(Math.max(0, dataArray[i] - 128)) cuts
+         * 'negative' samples. Multiplier makes them
+         * high proportionally to SVG container size.
+         */
+        const barHeight =
           Math.max(0, props.visualizationData[i] - 128) *
           barHeightMultiplier.value;
-
-        // Making bars stick to the bottom of a container.
-        // They normally render on the top, so Y coordinate
-        // must be calculated this way, to make them reach
-        // bottom border of svg container.
+        /**
+         * Making bars stick to the bottom of a container.
+         * They normally render on the top, so Y coordinate
+         * must be calculated this way, to make them reach
+         * bottom border of svg container.
+         */
         const coordY = visualizerHeight.value - barHeight;
 
         const bar = {
@@ -94,7 +100,8 @@ export default defineComponent({
 
     /**
      * Watches for change of 'start' button state
-     * if it has changes, turns on audio and visualization
+     * if it has changes, turns on audio and
+     * sets necessary data for visualization
      */
     watchEffect(() => {
       if (props.buttonClicked) {
@@ -106,6 +113,10 @@ export default defineComponent({
       }
     });
 
+    /**
+     * Watches for change of visualization data.
+     * If the change occured, renders frame
+     */
     watchEffect(() => {
       if (props.visualizationData) {
         requestAnimationFrame(renderFrame);

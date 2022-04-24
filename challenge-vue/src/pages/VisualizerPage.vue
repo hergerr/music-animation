@@ -24,7 +24,9 @@
 
 <script>
 /**
- * Page containing controls and audio visualizer
+ * Page which contains and manages audio controls.
+ * Responsible for getting necessary data and
+ * passing it to visualization component.
  */
 import { defineComponent, ref } from "vue";
 import { useAudio } from "@/composables/useAudio";
@@ -34,21 +36,32 @@ import { FREQUENCY } from "@/config/config";
 export default defineComponent({
   components: { AudioVisualizer },
   setup() {
+    /**
+     * Refenrence to audio component
+     */
     const audio = ref(null);
     const buttonClicked = ref(false);
     const errorOccured = ref(false);
+    /**
+     * Array with samples to visualize
+     */
     const visualizationData = ref([]);
+    /**
+     * Quantity of elements to visualize
+     */
     const visualizationBufferLength = ref(0);
 
     /**
-     * Gets called, once 'start' button is clicked.
-     * Makes button disappear and audio player appear
+     * Called, once 'start' button is clicked.
+     * Makes button disappear and audio player appear.
+     * Collects data to visualize and updates array
+     * with given frequency
      */
     const handlePlayButton = () => {
       const { analyser, dataArray, bufferLength } = useAudio(audio.value);
       visualizationBufferLength.value = bufferLength;
 
-      buttonClicked.value = !buttonClicked.value;
+      buttonClicked.value = true;
 
       setInterval(() => {
         analyser.getByteTimeDomainData(dataArray);

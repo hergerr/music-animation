@@ -5,18 +5,18 @@
 
 2] You chose to implement the application using this technology rather than the other option because:
 > Vue is VirtualDom based framework, thus the peformance is better.
-> I estimated, that there could be lot of state management with bars - there was not.
+> I estimated, that there could be lot of state management with bars.
 > Dividing frontend code to components makes it simpler to keep in order and to understand for others.
 
 3] How much time did you spend on this challenge?
 > I spent ~5 hours on one sitting to make working version.
 > I spent another ~6 hours reading articles, polishing code and testing other solutions, but it did not 
-> change look or way of working of programm. I could probably save some of that time, but 
+> change look or way of working of programm. I could probably save most of that time, but 
 > I just wanted to be sure, that I have done my best :).
 
 4] What was the most time consuming part of this challenge?
-> Understanding the necessary tools (audio processing, drawing and animating svg)
-> reminding myself Vue (I used it last time 6 months ago)
+> Understanding the necessary tools (audio processing, drawing and animating svg).
+> Reminding myself Vue (I used it last time 6 months ago).
 
 5] Is the 'Start' button strictly needed? If so, why? If not, would you think it would be better to remove it?
 > It is not needed. I think it would be better to remove it. However, some user interaction is required
@@ -34,6 +34,14 @@
 > 
 
 8] Do you have anything else to add to help us understand your approach?
-> Remember to open vscode with this directory as a root. 
+> 1. Remember to open vscode with this directory as a root. 
 > Here vetur config is located, which has all the settings for correct 
 > displaying of the code.
+> 2. I created 'pages' and 'componets' directories, because it is the 
+> way I consider reasonable. Every page contains state, which is passed downwards.
+> Further development of application can be faster, when there are pages to
+> connect to router
+> 3. I deliberately chose to make AudioVisualizer component responsible only 
+> for data presentation. There could be less code, if it would be responsible
+> also for getting data, but I found division between data processing and 
+> presenting for more important.
