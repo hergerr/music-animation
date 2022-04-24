@@ -24,7 +24,6 @@ import { defineComponent, ref, watchEffect } from "@vue/runtime-core";
 
 export default defineComponent({
   props: [
-    "temp",
     "audio",
     "buttonClicked",
     "errorOccured",
@@ -36,13 +35,15 @@ export default defineComponent({
     const visualizer = ref(null);
     const bars = ref([]);
     const barWidth = ref(0);
+    const visualizerHeight = ref(0);
+    
+    // Multiplier which makes the highest possible value
+    // to take whole SVG container height.
+    const barHeightMultiplier = ref(0);
 
     // Samples lower than 128 are treated as negative
     // and for better visualization, rounded to 0.
     const MAX_SAMPLE_VALUE = 255 - 128;
-
-    // Multiplier which makes the highest possible value
-    // to take whole SVG container height.
 
     /**
      *  Gets called after 'start' button is clicked.
@@ -62,11 +63,6 @@ export default defineComponent({
      * Draws the bars as an audio visualization
      */
     function renderFrame() {
-      const VISUALIZER_WIDTH = visualizer.value.width.baseVal.value;
-      const VISUALIZER_HEIGHT = visualizer.value.height.baseVal.value;
-      const BAR_HEIGHT_MULTIPLIER = VISUALIZER_HEIGHT / MAX_SAMPLE_VALUE;
-      barWidth.value = VISUALIZER_WIDTH / props.visualizationBufferLength;
-
       let coordX = 0;
 
       // Working with byte because of intuitive min and max value
@@ -75,13 +71,14 @@ export default defineComponent({
         // 'negative' samples. multiplier makes them
         // high proportionally to SVG container size
         let barHeight =
-          Math.max(0, props.visualizationData[i] - 128) * BAR_HEIGHT_MULTIPLIER;
+          Math.max(0, props.visualizationData[i] - 128) *
+          barHeightMultiplier.value;
 
         // Making bars stick to the bottom of a container.
         // They normally render on the top, so Y coordinate
         // must be calculated this way, to make them reach
         // bottom border of svg container.
-        const coordY = VISUALIZER_HEIGHT - barHeight;
+        const coordY = visualizerHeight.value - barHeight;
 
         const bar = {
           coordX,
@@ -102,6 +99,10 @@ export default defineComponent({
     watchEffect(() => {
       if (props.buttonClicked) {
         handleAudio();
+        const visualizerWidth = visualizer.value.width.baseVal.value;
+        barWidth.value = visualizerWidth / props.visualizationBufferLength;
+        visualizerHeight.value = visualizer.value.height.baseVal.value;
+        barHeightMultiplier.value = visualizerHeight.value / MAX_SAMPLE_VALUE;
       }
     });
 
