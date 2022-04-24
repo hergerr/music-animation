@@ -63,6 +63,11 @@ export default defineComponent({
 
       buttonClicked.value = true;
 
+      /**
+       * Collects data to visualize and updates array
+       * Byte format is used, because of ease 
+       * of operating with well-known range (0-255)
+       */
       setInterval(() => {
         analyser.getByteTimeDomainData(dataArray);
         visualizationData.value = [...dataArray];
