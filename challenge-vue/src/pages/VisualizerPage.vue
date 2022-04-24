@@ -17,6 +17,7 @@
       :visualizationData="visualizationData"
       :visualizationBufferLength="visualizationBufferLength"
       :buttonClicked="buttonClicked"
+      @error="errorOccured = true"
       v-model:errorOccured="errorOccured"
     />
   </div>

@@ -26,11 +26,9 @@ export default defineComponent({
   props: [
     "audio",
     "buttonClicked",
-    "errorOccured",
     "visualizationData",
     "visualizationBufferLength",
   ],
-  emits: ["update:errorOccured"],
   setup(props, { emit }) {
     const visualizer = ref(null);
     const bars = ref([]);
@@ -57,7 +55,7 @@ export default defineComponent({
       try {
         await props.audio.play();
       } catch (error) {
-        emit("update:errorOccured", true);
+        emit("error", true);
         return;
       }
     }
