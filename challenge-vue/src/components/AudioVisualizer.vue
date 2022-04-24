@@ -25,7 +25,7 @@ import { useAudio } from "@/composables/useAudio";
 import { FREQUENCY } from "@/config/config";
 
 export default defineComponent({
-  props: ["playAudio, audio"],
+  props: ["playAudio", "audio"],
   setup(props) {
     const visualizer = ref(null);
     const bars = ref([]);
