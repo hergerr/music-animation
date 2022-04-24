@@ -1,6 +1,5 @@
 <template>
   <div class="container mt-5 text-center">
-    <h1>Visualizer</h1>
     <visualizer-page />
   </div>
 </template>

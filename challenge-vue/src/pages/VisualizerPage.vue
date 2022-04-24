@@ -1,5 +1,7 @@
 <template>
   <div>
+    <h1 v-if="errorOccured">Error. Please refresh.</h1>
+    <h1 v-else>Visualizer</h1>
     <div class="button-player">
       <audio v-show="buttonClicked" controls src="music.mp3" ref="audio" />
       <button
@@ -10,7 +12,11 @@
         start
       </button>
     </div>
-    <audio-visualizer :audio="audio" :buttonClicked="buttonClicked" />
+    <audio-visualizer
+      :audio="audio"
+      :buttonClicked="buttonClicked"
+      v-model:errorOccured="errorOccured"
+    />
   </div>
 </template>
 
@@ -26,6 +32,7 @@ export default defineComponent({
   setup() {
     const audio = ref(null);
     const buttonClicked = ref(false);
+    const errorOccured = ref(false);
 
     /**
      * Gets called, once 'start' button is clicked.
@@ -37,6 +44,7 @@ export default defineComponent({
 
     return {
       audio,
+      errorOccured,
       buttonClicked,
       handlePlayButton,
     };

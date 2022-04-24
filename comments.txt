@@ -9,7 +9,7 @@
 > Dividing frontend code to components makes it simpler to keep in order and to understand for others.
 
 3] How much time did you spend on this challenge?
-> I spend ~5 hours on one sitting to make working version.
+> I spent ~5 hours on one sitting to make working version.
 > I also took than some time (1-2 hours) for refactor, playing
 > with settings and checking other possibilities to solve this problem.
 

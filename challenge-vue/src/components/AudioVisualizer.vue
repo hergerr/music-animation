@@ -25,8 +25,9 @@ import { useAudio } from "@/composables/useAudio";
 import { FREQUENCY } from "@/config/config";
 
 export default defineComponent({
-  props: ['audio', 'buttonClicked'],
-  setup(props) {
+  props: ["audio", "buttonClicked", "errorOccured"],
+  emits: ["update:errorOccured"],
+  setup(props, { emit }) {
     const visualizer = ref(null);
     const bars = ref([]);
 
@@ -35,8 +36,15 @@ export default defineComponent({
      *  Gets information about visualizer area and
      *  draws the bars as an audio visualization
      */
-    const handleAnimation = () => {
+    async function handleAnimation() {
       const { analyser, dataArray, bufferLength } = useAudio(props.audio);
+
+      try {
+        await props.audio.play();
+      } catch (error) {
+        emit("update:errorOccured", true);
+        return;
+      }
 
       const VISUALIZER_WIDTH = visualizer.value.width.baseVal.value;
       const VISUALIZER_HEIGHT = visualizer.value.height.baseVal.value;
@@ -89,9 +97,8 @@ export default defineComponent({
           requestAnimationFrame(renderFrame);
         }, 1000 / FREQUENCY);
       }
-      props.audio.play();
       renderFrame();
-    };
+    }
 
     /**
      * Watches for change of 'start' button state

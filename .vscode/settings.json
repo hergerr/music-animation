@@ -1,9 +1,3 @@
 {
-    "eslint.workingDirectories": [
-        "challenge-vue",
-        "challenge-javascript"
-    ],
-    "vetur.experimental": {
-        "templateInterpolationService": false
-    }
+  "eslint.workingDirectories": ["challenge-vue", "challenge-javascript"]
 }
