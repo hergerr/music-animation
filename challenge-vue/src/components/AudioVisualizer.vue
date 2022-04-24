@@ -67,8 +67,7 @@ export default defineComponent({
       function renderFrame() {
         let coordX = 0;
 
-        // Byte as samples values are saving some memmory.
-        // Precision loss is barely visible
+        // Working with byte because of intuitive min and max value
         analyser.getByteTimeDomainData(dataArray);
         for (let i = 0; i < bufferLength; i++) {
           // Math.max(Math.max(0, dataArray[i] - 128)) cuts
