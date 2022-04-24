@@ -39,8 +39,8 @@
 > displaying of the code.
 > 2. I created 'pages' and 'componets' directories, because it is the 
 > way I consider reasonable. Every page contains state, which is passed downwards.
-> Further development of application can be faster, when there are pages to
-> connect to router
+> Further development of application can be faster, when there already are pages to
+> connect to the router.
 > 3. I deliberately chose to make AudioVisualizer component responsible only 
 > for data presentation. There could be less code, if it would be responsible
 > also for getting data, but I found division between data processing and 

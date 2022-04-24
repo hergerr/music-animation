@@ -38,17 +38,17 @@ export default defineComponent({
   components: { AudioVisualizer },
   setup() {
     /**
-     * Refenrence to audio component
+     * Refenrence to audio component.
      */
     const audio = ref(null);
     const buttonClicked = ref(false);
     const errorOccured = ref(false);
     /**
-     * Array with samples to visualize
+     * Array with samples to visualize.
      */
     const visualizationData = ref([]);
     /**
-     * Quantity of elements to visualize
+     * Quantity of elements to visualize.
      */
     const visualizationBufferLength = ref(0);
 
@@ -56,7 +56,7 @@ export default defineComponent({
      * Called, once 'start' button is clicked.
      * Makes button disappear and audio player appear.
      * Collects data to visualize and updates array
-     * with given frequency
+     * with given frequency.
      */
     const handlePlayButton = () => {
       const { analyser, dataArray, bufferLength } = useAudio(audio.value);
@@ -65,9 +65,9 @@ export default defineComponent({
       buttonClicked.value = true;
 
       /**
-       * Collects data to visualize and updates array
+       * Collects data to visualize and updates array.
        * Byte format is used, because of ease 
-       * of operating with well-known range (0-255)
+       * of operating within well-known range (0-255).
        */
       setInterval(() => {
         analyser.getByteTimeDomainData(dataArray);
